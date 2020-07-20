@@ -82,9 +82,46 @@ df['location'] =  S
 df['location'] = df['location'].apply(lambda x:x.replace(',',' ').replace('-','').strip())
 df['location'].value_counts().head(20)
 
-#### Parsing Our Property
+#### Obervation from the Property Title column shows we have some Commercial properties(Lands for sale),
+### Doesnt represent Objective of this Project, hence needs to dropped
 property_type = df['property_title'].apply(lambda x:x.split('/')[0])
 df['property_type'] = property_type.apply(lambda x:x if "bedroom" in x.lower() or 'flat' in x.lower() else 0)
+df.head(100)
+
+### Creating new Dataframe that captures solely Flats or bedrooms to be rented
+df2 = df[df['property_type'] != 0]
+
+###Converting num_bathrooms and Num_toilets to integers
+df2[['num_bathrooms','num_toilet']] = df2[['num_bathrooms','num_toilet']].astype(int)
+
+#Dropping redundant columns
+df2.columns
+df2.drop(['property_title', 'property_location', 'property_price',
+       'property_features', 'property_link'], axis=1, inplace = True)
+#####################################################################
+
+#grouping properties by location using the groupby and sort_values functions
+location_stats = df2.groupby('location')['location'].agg("count").sort_values(ascending = False)
+location_stats.head(30)
+
+len(location_stats[location_stats<=5]) # we have 2188 unique location with Lagos State (with probablity of 1 Location appearing more than once)
+
+#grouping location_stats with <= 5 unique location as others
+location_less_than_5 = location_stats[location_stats<=5]
+
+df2['location'] = df2['location'].apply(lambda x: 'other' if x in location_less_than_5 else x)
+len(df2.location.unique())
+
+# Resetting index
+df2.reset_index(drop = True, inplace = True)
+df2.head(10)
+
+# Creating a Copy of df2
+
+df3 = df2.copy()
+
+df3.to_csv('house_price_cleaned_data.csv', index = False)
+pd.read_csv('house_price_cleaned_data.csv')
 
 
 
