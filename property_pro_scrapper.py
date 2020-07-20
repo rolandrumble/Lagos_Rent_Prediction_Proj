@@ -73,7 +73,7 @@ data.to_csv("property_list_2.csv", index = False)
 
 ######################################################################################
 
-df = pd.read_csv('property_list_2.csv')
+df = pd.read_csv('C:/Users/60004501/property_list_2.csv')
 
 
 
