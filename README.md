@@ -33,4 +33,4 @@ Got insight from webscrapping github repo (above) to scrap 9000 properties from 
 ## EDA
 I looked at the distibutione and value counts for various categorical variables within the locations columns. Below are visual highlights:
 
-<img src="https://github.com/rolandrumble/Lagos_Rent_Prediction_Proj/blob/Images/Correlation_plot.png" width="256" height="256" title="correlation_plot">   
+<img src="https://github.com/rolandrumble/Lagos_Rent_Prediction_Proj/blob/Images/Correlation_plot.png" width="256" height="256" title="correlation_plot"> 
