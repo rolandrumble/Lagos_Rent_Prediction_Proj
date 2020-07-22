@@ -34,3 +34,15 @@ Got insight from webscrapping github repo (above) to scrap 9000 properties from 
 I looked at the distibutione and value counts for various categorical variables within the locations columns. Below are visual highlights:
 
 <img src="https://github.com/rolandrumble/Lagos_Rent_Prediction_Proj/blob/Images/Correlation_plot.png" width="256" height="256" title="correlation_plot"> 
+
+## Model Building
+ First, I transformed the categorical variables (location column) into dummy variables. I splitted the data into a train and test sets wih a test size of 20%
+ I progressed by trying different models and evaluated them using Mean Absolute Error (MSE). I Choose MAE beacuse it is relatively easy to interpret and outliers are not particularly bad for this type of model.
+ 
+ I tried Three Different Models:
+  - Linear Regression - Baseline for the model
+  - Lasso Regression - Due to the sparse data from many categorical varibles in the **Location** column
+  - Decision Trees - Was a very good fit due to the sparsity of the data
+ 
+## Productinization
+ In this step, I built a Flask API end point that was hosted on my local webserver by following along with the **CODEBASICS** tutorials in the refrence section above. The API end ppoint takes in a request with a list (Number of Bedrooms, Number of Bathrooms, and Number of Toilets) which returns an Estimated House rent Price
